@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>PRO AUTO CLIMAT AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#111827;
+  color:white;
+  font-family:Arial,sans-serif;
+  padding:20px;
+}
+.container{max-width:650px;margin:auto}
+h1{color:#f59e0b;text-align:center}
+p{color:#cbd5e1}
+.card{
+  background:#1f2937;
+  padding:20px;
+  border-radius:14px;
+  margin-top:18px;
+}
+button,.upload{
+  display:block;
+  width:100%;
+  padding:15px;
+  margin-top:14px;
+  border:0;
+  border-radius:9px;
+  background:#f59e0b;
+  color:#111827;
+  font-weight:bold;
+  font-size:16px;
+  text-align:center;
+  cursor:pointer;
+}
+input{display:none}
+video{
+  width:100%;
+  margin-top:15px;
+  border-radius:10px;
+}
+#files{color:#cbd5e1;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>PRO AUTO CLIMAT AI</h1>
+<p style="text-align:center">Твой персональный ИИ-монтажёр</p>
+
+<div class="card">
+<h3>1. Выбери материалы</h3>
+<label class="upload" for="media">
+Добавить видео и фотографии
+</label>
+<input id="media" type="file" accept="video/*,image/*" multiple>
+<div id="files">Файлы пока не выбраны</div>
+</div>
+
+<div class="card">
+<h3>2. Предварительный просмотр</h3>
+<div id="preview">Здесь появится выбранное видео</div>
+</div>
+
+<div class="card">
+<h3>3. Настройки ролика</h3>
+<p>Формат: вертикальный 9:16</p>
+<p>Продолжительность: 30–60 секунд</p>
+<p>Стиль: динамичная реклама с юмором</p>
+<p>Озвучка: твой голос + ИИ</p>
+</div>
+
+<div class="card">
+<h3>4. Монтаж</h3>
+<p>Здесь будет запуск автоматического ИИ-монтажа.</p>
+<button disabled style="opacity:.5">
+Скоро будет доступно
+</button>
+</div>
+</div>
+
+<script>
+var media=document.getElementById('media');
+media.addEventListener('change',function(){
+  var files=media.files;
+  var list=document.getElementById('files');
+  var preview=document.getElementById('preview');
+  list.innerHTML='';
+  preview.innerHTML='';
+
+  for(var i=0;i<files.length;i++){
+    var item=document.createElement('p');
+    item.textContent=(i+1)+'. '+files[i].name;
+    list.appendChild(item);
+  }
+
+  if(files.length>0 && files[0].type.indexOf('video/')===0){
+    var video=document.createElement('video');
+    video.controls=true;
+    video.src=URL.createObjectURL(files[0]);
+    preview.appendChild(video);
+  }else if(files.length>0){
+    preview.textContent='Первый файл — фотография. Видео для предпросмотра не выбрано.';
+  }
+});
+</script>
+</body>
+</html>
